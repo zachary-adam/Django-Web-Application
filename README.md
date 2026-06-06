@@ -249,7 +249,7 @@ python manage.py collectstatic
 ```
 
 ### **Avatar Not Uploading**
-- Ensure media folder exists: `e:\WORK\websitewithpythondjango\media\`
+- Ensure media folder exists: `..\media\`
 - Check file permissions
 - Verify DEBUG=True in settings.py
 
