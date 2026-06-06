@@ -34,7 +34,7 @@ If Python is not installed, download from [python.org](https://www.python.org/do
 
 **Windows (Command Prompt or PowerShell):**
 ```bash
-cd e:\WORK\websitewithpythondjango
+cd ../projectfolder
 ```
 
 **macOS/Linux:**
