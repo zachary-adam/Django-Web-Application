@@ -34,12 +34,12 @@ If Python is not installed, download from [python.org](https://www.python.org/do
 
 **Windows (Command Prompt or PowerShell):**
 ```bash
-cd e:\WORK\websitewithpythondjango
+cd ../projectfolder
 ```
 
 **macOS/Linux:**
 ```bash
-cd /path/to/websitewithpythondjango
+cd /path/to/projectfolder
 ```
 
 ### Step 2: Install Python Dependencies
@@ -248,7 +248,7 @@ Must be Python 3.8 or higher
 ## Project Structure After Setup
 
 ```
-websitewithpythondjango/
+projectfolder/
 ├── db.sqlite3                 # Database (created after migrate)
 ├── manage.py                  # Django management script
 ├── requirements.txt           # Python dependencies

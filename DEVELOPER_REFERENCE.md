@@ -6,7 +6,7 @@ Quick reference guide for common development tasks.
 
 ```bash
 # Navigate to project
-cd e:\WORK\websitewithpythondjango
+cd ..\projectfolder
 
 # Install dependencies
 pip install -r requirements.txt

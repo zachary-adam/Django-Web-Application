@@ -36,7 +36,7 @@ A modern, dark-themed Django web application for user management and data entry.
 ## Project Structure
 
 ```
-websitewithpythondjango/
+projectfolder/
 ├── DataEntryProject/          # Main Django project
 │   ├── settings.py           # Project settings
 │   ├── urls.py               # Main URL configuration
@@ -91,7 +91,7 @@ pip install -r requirements.txt
 ### 3. **Navigate to Project Directory**
 
 ```bash
-cd e:\WORK\websitewithpythondjango
+cd ../projectfolder
 ```
 
 ### 4. **Run Migrations** (Already Done)
@@ -249,7 +249,7 @@ python manage.py collectstatic
 ```
 
 ### **Avatar Not Uploading**
-- Ensure media folder exists: `e:\WORK\websitewithpythondjango\media\`
+- Ensure media folder exists: `..\media\`
 - Check file permissions
 - Verify DEBUG=True in settings.py
 

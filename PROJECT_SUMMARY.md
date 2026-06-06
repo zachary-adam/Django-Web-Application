@@ -226,7 +226,7 @@ Text Secondary: #cbd5e1
 ## 📁 Complete Project Structure
 
 ```
-websitewithpythondjango/
+projectfolder/
 │
 ├── DataEntryProject/                  # Django Project Configuration
 │   ├── __init__.py
@@ -289,7 +289,7 @@ websitewithpythondjango/
 
 ```bash
 # 1. Navigate to project
-cd e:\WORK\websitewithpythondjango
+cd ../projectfolder
 
 # 2. Install dependencies
 pip install -r requirements.txt

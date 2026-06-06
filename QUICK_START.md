@@ -6,7 +6,7 @@
 
 ### Step 1: Open Command Prompt
 ```bash
-cd e:\WORK\websitewithpythondjango
+cd projectfolder
 ```
 
 ### Step 2: Install Dependencies
