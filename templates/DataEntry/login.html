@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - DataEntry{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>Welcome Back</h1>
+            <p>Login to your DataEntry account</p>
+        </div>
+
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                {{ form.username_or_email }}
+                {% if form.username_or_email.errors %}
+                    <small class="error">{{ form.username_or_email.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.password }}
+                {% if form.password.errors %}
+                    <small class="error">{{ form.password.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Don't have an account? <a href="{% url 'DataEntry:signup' %}">Sign up here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

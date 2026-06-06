@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Delete Entry - DataEntry{% endblock %}
+
+{% block content %}
+<div class="entity-container">
+    <div class="entity-header">
+        <h1>Delete Entry?</h1>
+    </div>
+
+    <div class="entity-content">
+        <div class="entity-card">
+            <div class="warning-message">
+                <p>Are you sure you want to delete this entry?</p>
+                <div class="entry-preview">
+                    <h3>{{ entity.title }}</h3>
+                    <p>{{ entity.description|truncatewords:20 }}</p>
+                </div>
+                <p class="warning-text">This action cannot be undone.</p>
+            </div>
+
+            <div class="entity-actions">
+                <form method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                </form>
+                <a href="{% url 'DataEntry:home' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

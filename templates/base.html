@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DataEntry Application{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="{% url 'DataEntry:home' %}">DataEntry</a>
+            </div>
+            <div class="nav-avatar-container">
+                <div class="avatar-dropdown">
+                    {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="avatar-img" id="avatarBtn">
+                    {% else %}
+                        <div class="avatar-placeholder" id="avatarBtn">
+                            {{ user.username|first|upper }}
+                        </div>
+                    {% endif %}
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="{% url 'DataEntry:profile' %}" class="dropdown-item">
+                            <span class="icon">👤</span> My Profile
+                        </a>
+                        <a href="{% url 'DataEntry:logout' %}" class="dropdown-item logout-item">
+                            <span class="icon">🚪</span> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                    <button class="alert-close" onclick="this.parentElement.style.display='none';">×</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <script>
+        // Avatar dropdown toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const avatarBtn = document.getElementById('avatarBtn');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            
+            if (avatarBtn && dropdownMenu) {
+                avatarBtn.addEventListener('click', function() {
+                    dropdownMenu.classList.toggle('active');
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (!event.target.closest('.avatar-dropdown')) {
+                        dropdownMenu.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

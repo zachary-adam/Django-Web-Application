@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile - DataEntry{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <h1>My Profile</h1>
+    </div>
+
+    <div class="profile-content">
+        <div class="profile-card">
+            <div class="profile-section">
+                <h2>Profile Information</h2>
+                
+                <div class="profile-avatar">
+                    <div class="avatar-wrapper">
+                        {% if user_profile.avatar and user_profile.avatar.name != 'avatars/default-avatar.png' %}
+                            <img src="{{ user_profile.avatar.url }}" alt="Avatar" class="profile-avatar-img">
+                        {% else %}
+                            <div class="profile-avatar-placeholder">
+                                {{ user.username|first|upper }}
+                            </div>
+                        {% endif %}
+                        <form id="avatar-form" method="POST" enctype="multipart/form-data" style="display:none;">
+                            {% csrf_token %}
+                            {{ avatar_form.avatar }}
+                        </form>
+                        <label for="{{ avatar_form.avatar.id_for_label }}" class="avatar-edit-icon" title="Change Avatar">
+                            ✏️
+                        </label>
+                    </div>
+                </div>
+
+                <div class="profile-info">
+                    <div class="info-item">
+                        <label>Full Name</label>
+                        <p>{{ user_profile.full_name|default:"Not set" }}</p>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Username</label>
+                        <p>{{ user.username }}</p>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Email</label>
+                        <p>{{ user.email }}</p>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Member Since</label>
+                        <p>{{ user.date_joined|date:"M d, Y" }}</p>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <a href="{% url 'DataEntry:profile_edit' %}" class="btn btn-primary">Edit Profile</a>
+                    <a href="{% url 'DataEntry:change_password' %}" class="btn btn-secondary">Change Password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const avatarInput = document.getElementById('{{ avatar_form.avatar.id_for_label }}');
+    const avatarForm = document.getElementById('avatar-form');
+    
+    if (avatarInput && avatarForm) {
+        avatarInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                avatarForm.submit();
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

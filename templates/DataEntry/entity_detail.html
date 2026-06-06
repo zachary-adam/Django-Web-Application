@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ entity.title }} - DataEntry{% endblock %}
+
+{% block content %}
+<div class="entity-container">
+    <div class="entity-header">
+        <a href="{% url 'DataEntry:home' %}" class="back-link">← Back to Home</a>
+        <h1>{{ entity.title }}</h1>
+    </div>
+
+    <div class="entity-content">
+        <div class="entity-card">
+            <div class="entity-meta">
+                <small>Created on {{ entity.created_at|date:"M d, Y H:i" }}</small>
+                {% if entity.updated_at != entity.created_at %}
+                    <small>Last updated {{ entity.updated_at|date:"M d, Y H:i" }}</small>
+                {% endif %}
+            </div>
+
+            <div class="entity-body">
+                {{ entity.description }}
+            </div>
+
+            <div class="entity-actions">
+                <a href="{% url 'DataEntry:entity_delete' entity.pk %}" class="btn btn-danger">Delete Entry</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

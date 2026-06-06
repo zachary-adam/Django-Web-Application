@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - DataEntry{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <div class="home-header">
+        <h1>Welcome, {{ user.first_name|default:user.username }}!</h1>
+        <p>Add new data entries below</p>
+    </div>
+
+    <div class="home-content">
+        <div class="entry-form-section">
+            <div class="section-card">
+                <h2>Add New Entry</h2>
+                <form method="POST" class="entry-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="{{ form.title.id_for_label }}">Title</label>
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                            <small class="error">{{ form.title.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.description.id_for_label }}">Description</label>
+                        {{ form.description }}
+                        {% if form.description.errors %}
+                            <small class="error">{{ form.description.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Entry</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="entries-list-section">
+            <div class="section-card">
+                <h2>Your Entries</h2>
+                {% if entities %}
+                    <div class="entries-grid">
+                        {% for entity in entities %}
+                            <div class="entry-card">
+                                <h3>{{ entity.title }}</h3>
+                                <p class="entry-description">{{ entity.description|truncatewords:15 }}</p>
+                                <small class="entry-date">{{ entity.created_at|date:"M d, Y" }}</small>
+                                <div class="entry-actions">
+                                    <a href="{% url 'DataEntry:entity_detail' entity.pk %}" class="btn-link">View</a>
+                                    <a href="{% url 'DataEntry:entity_delete' entity.pk %}" class="btn-link delete">Delete</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <p>No entries yet. Create your first entry above!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
